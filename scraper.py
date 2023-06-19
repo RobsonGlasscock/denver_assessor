@@ -2,10 +2,21 @@ from selenium import webdriver
 
 browser = webdriver.Chrome()
 type(browser)
-browser.get("https://zillow.com")
+browser.get("https://redfin.com")
 
-# test commit after renaming the GitHub repo.
 
-# test commit 2, see if warning about repo moving cleared up on it's own
+userElem = browser.find_element_by_id("search-box-input")
 
-# third test commit after using git remote set-url to update repo.
+# input the address and then the enter key into the search box.
+userElem.send_keys("681 S Gaylord St Denver CO" + "\n")
+
+# find the url after entering the address.
+browser.current_url
+
+from bs4 import BeautifulSoup
+import requests
+
+u = requests.get(browser.current_url)
+soup = BeautifulSoup(u.text, "html.parser")
+
+soup
