@@ -11,7 +11,9 @@ browser = webdriver.Chrome()
 # set path to download all files for Gaylord into a Gaylord folder.
 file_path = os.getcwd() + "/Gaylord"
 
-for i in range(600, 700, 1):
+integer_hold = [681]
+# for i in range(600, 700, 1):
+for i in integer_hold:
     browser.get("https://redfin.com")
     # insert random sleep time for pull
     sleep(random.randint(2, 12))
@@ -30,6 +32,58 @@ for i in range(600, 700, 1):
         f.write(browser.page_source)
     # last random sleep
     sleep(random.randint(10, 20))
+
+################
+%pwd
+
+# see url
+browser.current_url
+
+
+# set variable qual to current url. 
+url_string= browser.current_url
+browser.get(url_string)
+
+url_string
+
+import pywebcopy
+from pywebcopy import save_webpage
+
+
+url= url_string
+download_folder= %pwd
+
+url
+# kwargs= {'bypass_robots':True, 'project_name': 'recognisable-name'}
+save_webpage('https://www.redfin.com/CO/Denver/681-S-Gaylord-St-80209/home/34126392')
+
+https://www.redfin.com/CO/Denver/681-S-Gaylord-St-80209/home/34126392
+
+save_webpage(https://www.redfin.com/CO/Denver/681-S-Gaylord-St-80209/home/34126392)
+
+
+browser.current_url.page_source()
+browser.get(browser.current_url).page_source()
+
+browser.page_source
+print(browser.page_source)
+browser
+userElem
+
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
+# os.chdir("./tester")
+
+
+save_me = ActionChains(browser).key_down(Keys.CONTROL)\
+         .key_down('s').key_up(Keys.CONTROL).key_up('s')
+
+save_me.perform()
+
+browser.current_url
+
+################
 
 
 # find the url after entering the address.
