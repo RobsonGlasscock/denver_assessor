@@ -9,8 +9,13 @@ import random
 import os
 import pywebcopy
 from pywebcopy import save_webpage
+######### laptop############
+''' TODO '''
+from selenium.webdriver.common.by import By
 
-integer_hold = [681, 695]
+
+# Add 682 S. Gaylord which is a non-existant address to see what the downloaded .html file looks like. 
+integer_hold = [681, 682, 695]
 # for i in range(600, 700, 1):
 for i in integer_hold:
     browser = webdriver.Chrome()
@@ -22,7 +27,10 @@ for i in integer_hold:
     # more random sleep time
     sleep(random.randint(4, 8))
     # find the search box
-    userElem = browser.find_element_by_id("search-box-input")
+    '''TODO '''
+    # userElem = browser.find_element_by_id("search-box-input")
+    ############# laptop################
+    userElem= browser.find_element(By.ID,'search-box-input' )
     # feed in the text string with the appended enter key at the end into the box
     userElem.send_keys(text_str)
 
@@ -47,13 +55,24 @@ for i in integer_hold:
     save_webpage(
         url=url_string,
         project_folder="/home/robson/wash_park_scrape/pywebcopy/",
-        project_name=text_str[:-1],
+        # replace spaces in text string with dashes and lop off the '/n'
+        project_name=text_str[:-1].replace(' ', '-'),
         bypass_robots=True,
         debug=True,
         open_in_browser=False,
         delay=None,
         threaded=False,
     )
+
+    browser.close()
+    '''TODO: add a line to close the browser? '''
+
+# the path for properties that exist contains .../www.redfin.com/CO 
+# whereas the path for non-existant properties contains .../www.redfin.com/city
+
+text_str[:-1]
+
+browser.find
 
 """ Ended up not being able to use this. It seemed like the CTRL + S never hit the webpage 
 and only the ENTER and TAB calls were fed into the page. The plan below was to use CTRL + S to then save the page but this failed. 
