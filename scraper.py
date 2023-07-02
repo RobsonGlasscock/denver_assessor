@@ -9,8 +9,6 @@ import random
 import os
 import pywebcopy
 from pywebcopy import save_webpage
-######### laptop############
-''' TODO '''
 from selenium.webdriver.common.by import By
 
 
@@ -27,9 +25,6 @@ for i in integer_hold:
     # more random sleep time
     sleep(random.randint(4, 8))
     # find the search box
-    '''TODO '''
-    # userElem = browser.find_element_by_id("search-box-input")
-    ############# laptop################
     userElem= browser.find_element(By.ID,'search-box-input' )
     # feed in the text string with the appended enter key at the end into the box
     userElem.send_keys(text_str)
@@ -65,14 +60,10 @@ for i in integer_hold:
     )
 
     browser.close()
-    '''TODO: add a line to close the browser? '''
+
 
 # the path for properties that exist contains .../www.redfin.com/CO 
 # whereas the path for non-existant properties contains .../www.redfin.com/city
-
-text_str[:-1]
-
-browser.find
 
 """ Ended up not being able to use this. It seemed like the CTRL + S never hit the webpage 
 and only the ENTER and TAB calls were fed into the page. The plan below was to use CTRL + S to then save the page but this failed. 
