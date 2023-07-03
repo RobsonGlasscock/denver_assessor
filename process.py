@@ -1,9 +1,8 @@
-%reset -f
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 import os
-
+import datetime
 
 #####################
 # Single firm 
@@ -15,8 +14,6 @@ os.chdir(pather)
 # For all property addresses that exist this is the pattern. 
 os.chdir("681-S-Gaylord-St-Denver-CO/www.redfin.com/CO/Denver/")
 
-%pwd
-%ls
 # There will be one folder that is a slight variation on the address: 681-S-Gaylord-St-80209 rather than 681-S-Gaylord-St-Denver-CO
 
 dir_descend = None
@@ -109,10 +106,29 @@ for i in os.listdir():
             df= pd.DataFrame(data={stringer.split('\\')[0]: [stringer.split('\\')[1]],stringer.split('\\')[2]: [stringer.split('\\')[3]] })
 
             df.rename(columns={df.columns[1]: 'lastSoldDate'}, inplace=True)    
+
+            tmp= df['lastSoldDate'].loc[0]
+            print(tmp)
+            tmp=tmp[2:-1]
+            print(tmp)
+            tmp= int(tmp)
+            tmp = tmp/ 1000
+            print(tmp)
+            # convert epoch to date 
+            df['lastSoldDate'].iloc[0]= datetime.datetime.fromtimestamp(tmp).strftime('%m-%d-%Y')
             master_df= pd.concat([master_df, df])
 
     except:
         pass 
+
+master_df
+
+tmp= master_df['lastSoldDate'].iloc[0]
+tmp=tmp[4:-2]
+tmp= int(tmp)
+tmp = tmp/ 1000
+          
+datetime.datetime.fromtimestamp(tmp).strftime('%m-%d-%Y')
 
 master_df
 ######### scaffoldilng ########
