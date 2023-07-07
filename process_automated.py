@@ -1,3 +1,4 @@
+%reset -f
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
@@ -72,3 +73,19 @@ for i in os.listdir():
         pass
 
 master_df
+
+from datetime import datetime
+
+master_df["lastSoldDate"] = master_df["lastSoldDate"].apply(
+    lambda x: datetime.strptime(x, "%m-%d-%Y")
+)
+
+
+master_df["lastSoldPrice"] = master_df["lastSoldPrice"].astype(float)
+pd.options.display.float_format = "{:,.0f}".format
+
+master_df
+
+master_df[master_df["lastSoldDate"] >= "2023-05-01"].sort_values(
+    by="lastSoldDate", ascending=False
+)
